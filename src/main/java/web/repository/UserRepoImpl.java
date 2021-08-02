@@ -1,5 +1,7 @@
 package web.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -58,7 +60,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public User getUserByUsername(String username) {
         return getEntityManager()
-                .createQuery("select u from User u where u.username = :username", User.class)
+                .createQuery("select u from User u left join fetch u.roles where u.username = :username", User.class)
                 .setParameter("username", username)
                 .getSingleResult();
     }
