@@ -26,10 +26,7 @@ public class RootController {
     }
 
 
-    @GetMapping(value = "/test")
-    public String test() {
-        return "helloPage";
-    }
+
 
 
 }
