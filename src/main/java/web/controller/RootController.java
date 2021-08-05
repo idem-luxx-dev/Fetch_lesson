@@ -17,7 +17,7 @@ public class RootController {
         messages.add("Привет!");
         messages.add("Оно работает. Зайдешь?");
         model.addAttribute("messages", messages);
-        return "helloPage";
+        return "redirect:/login";
     }
 
     @GetMapping(value = "/login")
@@ -26,6 +26,10 @@ public class RootController {
     }
 
 
+    @GetMapping(value = "/test")
+    public String test() {
+        return "helloPage";
+    }
 
 
 }

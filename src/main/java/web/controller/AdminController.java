@@ -1,5 +1,6 @@
 package web.controller;
 
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,5 @@ public class AdminController {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
-
 
 }
