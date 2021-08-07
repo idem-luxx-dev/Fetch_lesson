@@ -15,6 +15,10 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements Serializable, UserDetails {
 
+    @Version
+    @JsonIgnore
+    private long version;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

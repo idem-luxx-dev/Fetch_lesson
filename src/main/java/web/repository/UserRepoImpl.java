@@ -2,10 +2,13 @@ package web.repository;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import web.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -52,6 +55,7 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public List<User> getAllUsers() {
+
         return getEntityManager()
                 .createQuery("select u from User u", User.class)
                 .getResultList();
