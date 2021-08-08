@@ -30,39 +30,4 @@ public class AdminController {
     }
 
 
-    @PostMapping(value = "/admin/add" )
-    public String postUser(@ModelAttribute("user") User user,
-                           @RequestParam(required=false) String role) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getDefaultRole());
-
-        if (role != null && role.equals("ROLE_ADMIN")) {
-            roles.add(roleService.getRoleByName(role));
-        }
-        user.setRoles(roles);
-        userService.addUser(user);
-
-        return "redirect:/admin";
-    }
-
-    @PostMapping(value = "admin/edit/{id}")
-    public String editUser(@ModelAttribute("user") User user,
-                           @RequestParam(required=false) String role) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getDefaultRole());
-        if (role != null && role.equals("ROLE_ADMIN")) {
-            roles.add(roleService.getRoleByName(role));
-        }
-        user.setRoles(roles);
-        userService.editUser(user);
-        return "redirect:/admin";
-    }
-
-
-    @GetMapping(value = "/admin/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin";
-    }
-
 }

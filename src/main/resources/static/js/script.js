@@ -140,6 +140,7 @@ function loadModal(id, editMode = true) {
 
 }
 
+
 function deleteUser(id) {
     fetch('/api/delete/' + id, {method: 'DELETE'})
         .then(function (response) {
@@ -152,8 +153,8 @@ function deleteUser(id) {
         });
 
     deleteFormId.modal('hide');
-    sleep(200);
-    getAllUsers();
+    userTableId.find('#userRow\\[' + id + '\\]').remove();
+
 
 }
 
