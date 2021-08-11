@@ -33,6 +33,11 @@ function insertUser() {
         .then( function (response)  {
             if(response.ok){
                 console.info("User with id = " + user.id + " was inserted");
+                sleep(200);
+                $('#tableLink').trigger('click');
+            } else {
+                userAddFormId.find('#password').addClass('alert alert-danger');
+                userAddFormId.find('#password').attr('placeholder', "password is too short!");
             }
         });
 
@@ -218,11 +223,11 @@ function sleep(milliseconds) {
 
 $('#addButton').click(() => {
     insertUser();
-    sleep(200);
-    $('#tableLink').trigger('click');
 });
 
 $('#newUserLink').click(() => {
+    userAddFormId.find('#password').removeClass('alert alert-danger');
+    userAddFormId.find('#password').removeAttr('placeholder');
 
     fetch('/api/roles').then(function (response) {
         if (response.ok) {

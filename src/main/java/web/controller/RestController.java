@@ -13,6 +13,7 @@ import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
@@ -25,9 +26,13 @@ public class RestController {
     public RoleService roleService;
 
     @PostMapping(value = "/api/add")
-    public ResponseEntity<Void> insert(@RequestBody User user) {
-        userService.addUser(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Void> insert(@RequestBody @Valid User user, BindingResult bind) {
+        if(bind.hasErrors()){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } else {
+            userService.addUser(user, bind);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
     @GetMapping(value = "/api/get/{id}")

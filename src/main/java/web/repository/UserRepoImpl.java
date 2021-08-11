@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.validation.BindingResult;
 import web.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -26,8 +27,12 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public void addUser(User user) {
-        getEntityManager().persist(user);
+    public void addUser(User user, BindingResult bind) {
+        if(!bind.hasFieldErrors()) {
+            getEntityManager().persist(user);
+        } else {
+            System.out.println("Password is less then six symbols!");
+        }
     }
 
     @Override

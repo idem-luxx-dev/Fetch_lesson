@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import web.model.User;
 import web.repository.UserRepo;
 import web.service.UserService;
@@ -28,8 +29,8 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(){}
 
     @Override
-    public void addUser(User user) {
-        userRepo.addUser(user);
+    public void addUser(User user, BindingResult bind) {
+        userRepo.addUser(user, bind);
     }
 
     @Override
